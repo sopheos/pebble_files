@@ -48,6 +48,26 @@ class File
         return is_file($this->filename);
     }
 
+    public function atime(): int
+    {
+        return $this->isFile() ? fileatime($this->filename) : 0;
+    }
+
+    public function ctime(): int
+    {
+        return $this->isFile() ? filectime($this->filename) : 0;
+    }
+
+    public function mtime(): int
+    {
+        return $this->isFile() ? filemtime($this->filename) : 0;
+    }
+
+    public function stats(): ?array
+    {
+        return $this->isOpen() ? fstat($this->stream) : null;
+    }
+
     /**
      * Reads entire file into a string
      *
